@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Powerup"))
         {
+            StopAllCoroutines();
             hasPowerup = true;
             powerupIndicator.gameObject.SetActive(true);
             Destroy(other.gameObject);
