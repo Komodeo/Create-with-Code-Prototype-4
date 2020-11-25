@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,12 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
 
         powerupIndicator.transform.position = transform.position;
+
+        // Restart game if player falls
+        if (transform.position.y < -10)
+        {
+            SceneManager.LoadScene("Prototype 4");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,7 +62,6 @@ public class PlayerController : MonoBehaviour
             Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
 
             enemyRb.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
-            Debug.Log("Collided with: " + collision.gameObject.name + " with powerup set to " + hasPowerup);
         }
     }
 }
